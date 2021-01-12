@@ -4,23 +4,24 @@
 #include <sys/type.h>
 
 #define LIM 1e10
+#define NOTP  1
 
 
 int main()
 {
 	uint8_t *p = malloc(LIM);
 	if (!p) exit(1);
-	memset(p, 1, 2);
+	memset(p, NOTP, 2);
 
-	uint64_t o;
+	uint64_t m, n, o;
 
-	for (uint64_t n = 4; n < LIM; n+=2) p[n] = 1;
-	for (uint64_t n = 3; n*n < LIM; n+=2)
+	for (n = 4; n < LIM; n+=2) p[n] = NOTP;
+	for (n = 3; n*n < LIM; n+=2)
 	{
 		if (!p[n])
 		{
 			o = n << 1;
-			for (uint64_t m = n*n; m < LIM; m+=o) p[m] = 1;
+			for (m = n*n; m < LIM; m+=o) p[m] = NOTP;
 		}
 	}
 
